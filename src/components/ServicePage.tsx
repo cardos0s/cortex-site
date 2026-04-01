@@ -328,10 +328,10 @@ export default function ServicePage({
               {p.portfolio.map(
                 (
                   project: {
-                    name: string;
-                    tag: string;
-                    description: string;
-                    metrics: string[];
+                    readonly name: string;
+                    readonly tag: string;
+                    readonly description: string;
+                    readonly metrics: readonly string[];
                   },
                   i: number
                 ) => (

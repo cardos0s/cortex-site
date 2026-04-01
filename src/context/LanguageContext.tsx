@@ -3,9 +3,12 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { translations, Language } from "@/i18n/translations";
 
+type TranslationType = (typeof translations)["pt"] | (typeof translations)["en"];
+
 type LanguageContextType = {
   lang: Language;
-  t: (typeof translations)["pt"];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  t: any;
   toggleLanguage: () => void;
 };
 
@@ -18,9 +21,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLang((prev) => (prev === "pt" ? "en" : "pt"));
   };
 
+  const t: TranslationType = translations[lang];
+
   return (
     <LanguageContext.Provider
-      value={{ lang, t: translations[lang], toggleLanguage }}
+      value={{ lang, t, toggleLanguage }}
     >
       {children}
     </LanguageContext.Provider>
