@@ -22,10 +22,18 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formspree.io/f/mqeglozl", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          _subject: `[CÓRTEX] Novo contato de ${formState.name}`,
+        }),
       });
 
       if (res.ok) {
